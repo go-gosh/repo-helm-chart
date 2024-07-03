@@ -30,7 +30,7 @@ jobs:
           if [ -f "$dir/Chart.yaml" ]; then
             # 如果目录包含Chart.yaml，则认为它是一个Helm chart
             echo "Packaging chart in $dir"
-            helm package "$dir" --destination ../
+            helm package "$dir" --destination ./
           fi
         done
 
