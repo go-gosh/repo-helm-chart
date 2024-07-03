@@ -1,0 +1,51 @@
+name: Package Helm Charts
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  package-charts:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v2
+      with:
+        ref: master
+
+    - name: Set up Helm
+      uses: azure/setup-helm@v1
+      with:
+        version: 'v3.*'
+
+    - name: Package Helm charts
+      run: |
+        # 切换到deploy分支
+        git checkout -b deploy
+
+        # 遍历所有目录
+        for dir in */ ; do
+          if [ -f "$dir/Chart.yaml" ]; then
+            # 如果目录包含Chart.yaml，则认为它是一个Helm chart
+            echo "Packaging chart in $dir"
+            helm package "$dir" --destination deploy
+          fi
+        done
+
+        helm index .
+
+        # 配置Git用户信息
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
+        # 提交打包的chart
+        git add deploy
+        if git diff --quiet --cached; then
+          echo "No changes to commit"
+        else
+          git commit -m "Package Helm charts"
+          # 推送到deploy分支
+          git push origin deploy
+        fi
