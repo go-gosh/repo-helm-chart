@@ -30,7 +30,7 @@ jobs:
           if [ -f "$dir/Chart.yaml" ]; then
             # 如果目录包含Chart.yaml，则认为它是一个Helm chart
             echo "Packaging chart in $dir"
-            helm package "$dir" --destination deploy
+            helm package "$dir" --destination ../
           fi
         done
 
@@ -47,5 +47,5 @@ jobs:
         else
           git commit -m "Package Helm charts"
           # 推送到deploy分支
-          git push origin deploy
+          git push -f origin deploy
         fi
