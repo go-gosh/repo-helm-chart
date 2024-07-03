@@ -41,7 +41,7 @@ jobs:
         git config --local user.name "GitHub Action"
 
         # 提交打包的chart
-        git add deploy
+        git add .
         if git diff --quiet --cached; then
           echo "No changes to commit"
         else
