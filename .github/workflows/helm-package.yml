@@ -34,7 +34,7 @@ jobs:
           fi
         done
 
-        helm index .
+        helm repo index .
 
         # 配置Git用户信息
         git config --local user.email "action@github.com"
