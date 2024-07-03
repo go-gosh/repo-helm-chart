@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  cloud-app:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-03T16:03:49.545442427Z"
+    description: A Helm chart for Kubernetes
+    digest: e47216d46d1a2bce5d25b0a1bb326fa6233b6b9a017613179b347ff78c5bf83b
+    name: cloud-app
+    type: application
+    urls:
+    - cloud-app-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-07-03T16:03:49.544931999Z"
