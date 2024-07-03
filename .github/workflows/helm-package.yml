@@ -31,11 +31,13 @@ jobs:
             # 如果目录包含Chart.yaml，则认为它是一个Helm chart
             echo "Packaging chart in $dir"
             helm package "$dir" --destination ./
+            rm -rf "$dir"
           fi
         done
 
         helm repo index .
-
+    - name: Push to deploy
+      run: |
         # 配置Git用户信息
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
