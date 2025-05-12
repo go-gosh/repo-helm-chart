@@ -35,7 +35,7 @@ jobs:
           fi
         done
 
-        helm repo index .
+        helm repo --url https://github.com/go-gosh/repo-helm-chart/tree/deploy index .
     - name: Push to deploy
       run: |
         # 配置Git用户信息
